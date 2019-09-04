@@ -19,8 +19,6 @@ import javax.servlet.http.Part;
 
 @WebServlet("/upload")
 @MultipartConfig
-
-
 public class uploadFile extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

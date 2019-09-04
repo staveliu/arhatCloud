@@ -5,7 +5,7 @@ import java.util.Date;
 public class User {
     private Integer uid;
 
-    private String rid;
+    private Integer rid;
 
     private String username;
 
@@ -29,12 +29,12 @@ public class User {
         this.uid = uid;
     }
 
-    public String getRid() {
+    public Integer getRid() {
         return rid;
     }
 
-    public void setRid(String rid) {
-        this.rid = rid == null ? null : rid.trim();
+    public void setRid(Integer rid) {
+        this.rid = rid;
     }
 
     public String getUsername() {

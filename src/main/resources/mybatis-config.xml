@@ -4,10 +4,6 @@
 <!--mybatis主配置文件-->
 <configuration>
 
-    <!--定义别名-->
-    <typeAliases>
-<typeAlias type="com.newer.domain.RohanCloud" alias="RohanCloud"/>
-    </typeAliases>
 
     <!--数据库连接环境配置-->
     <environments default="env1">
@@ -27,7 +23,7 @@
 
     <!--定义映射器-->
     <mappers>
-        <mapper resource="mapper/config" />
+        <mapper class = "com.newer.mapper.UserMapper" />
     </mappers>
 	
 </configuration>

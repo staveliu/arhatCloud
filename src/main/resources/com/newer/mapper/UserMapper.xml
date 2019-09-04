@@ -21,6 +21,12 @@
     from yin_users
     where uid = #{uid,jdbcType=INTEGER}
   </select>
+  <select id="selectByUserPass" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from yin_users
+    where username = #{username,jdbcType=VARCHAR} and password = #{password,jdbcType=VARCHARs}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from yin_users
     where uid = #{uid,jdbcType=INTEGER}
