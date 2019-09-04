@@ -133,7 +133,7 @@ input[type=password] {
     color: #fff;
 }
 
-input[type=email] {
+input[type=username] {
     width: 240px;
     text-align: center;
     background: transparent;
