@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.newer.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="com.newer.domain.User">
+    <id column="uid" jdbcType="INTEGER" property="uid" />
+    <result column="rid" jdbcType="VARCHAR" property="rid" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="iconurl" jdbcType="VARCHAR" property="iconurl" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="last_login" jdbcType="TIMESTAMP" property="lastLogin" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    uid, rid, username, password, email, mobile, iconurl, status, last_login
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from yin_users
+    where uid = #{uid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from yin_users
+    where uid = #{uid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.newer.domain.User">
+    insert into yin_users (uid, rid, username, 
+      password, email, mobile, 
+      iconurl, status, last_login
+      )
+    values (#{uid,jdbcType=INTEGER}, #{rid,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
+      #{iconurl,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{lastLogin,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.newer.domain.User">
+    insert into yin_users
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="uid != null">
+        uid,
+      </if>
+      <if test="rid != null">
+        rid,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="mobile != null">
+        mobile,
+      </if>
+      <if test="iconurl != null">
+        iconurl,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="lastLogin != null">
+        last_login,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="uid != null">
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="rid != null">
+        #{rid,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="iconurl != null">
+        #{iconurl,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="lastLogin != null">
+        #{lastLogin,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.newer.domain.User">
+    update yin_users
+    <set>
+      <if test="rid != null">
+        rid = #{rid,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="iconurl != null">
+        iconurl = #{iconurl,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="lastLogin != null">
+        last_login = #{lastLogin,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where uid = #{uid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.newer.domain.User">
+    update yin_users
+    set rid = #{rid,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      iconurl = #{iconurl,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      last_login = #{lastLogin,jdbcType=TIMESTAMP}
+    where uid = #{uid,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="1com.newer.domain.User">
+    <id column="uid" jdbcType="INTEGER" property="uid" />
+    <result column="rid" jdbcType="VARCHAR" property="rid" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="iconurl" jdbcType="VARCHAR" property="iconurl" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="last_login" jdbcType="TIMESTAMP" property="lastLogin" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    uid, rid, username, password, email, mobile, iconurl, status, last_login
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from yin_users
+    where uid = #{uid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from yin_users
+    where uid = #{uid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="1com.newer.domain.User">
+    insert into yin_users (uid, rid, username, 
+      password, email, mobile, 
+      iconurl, status, last_login
+      )
+    values (#{uid,jdbcType=INTEGER}, #{rid,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
+      #{iconurl,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{lastLogin,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="1com.newer.domain.User">
+    insert into yin_users
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="uid != null">
+        uid,
+      </if>
+      <if test="rid != null">
+        rid,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="mobile != null">
+        mobile,
+      </if>
+      <if test="iconurl != null">
+        iconurl,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="lastLogin != null">
+        last_login,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="uid != null">
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="rid != null">
+        #{rid,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="iconurl != null">
+        #{iconurl,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="lastLogin != null">
+        #{lastLogin,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="1com.newer.domain.User">
+    update yin_users
+    <set>
+      <if test="rid != null">
+        rid = #{rid,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="iconurl != null">
+        iconurl = #{iconurl,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="lastLogin != null">
+        last_login = #{lastLogin,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where uid = #{uid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="1com.newer.domain.User">
+    update yin_users
+    set rid = #{rid,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      iconurl = #{iconurl,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      last_login = #{lastLogin,jdbcType=TIMESTAMP}
+    where uid = #{uid,jdbcType=INTEGER}
+  </update>
+</mapper>

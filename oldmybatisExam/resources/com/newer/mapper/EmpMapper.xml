@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.newer.mapper.EmpMapper">
+
+   <resultMap id="emp1" type="com.newer.domain.Emp">
+       <id property="empno" column="empno"/>
+       <result property="ename" column="ename"/>
+       <result property="sal" column="sal"/>
+       <result property="hiredate" column="hiredate"/>
+       <result property="job" column="job"/>
+       <association property="dept" javaType="com.newer.domain.Dept">
+           <id property="deptno" column="deptno"/>
+           <result property="dname" column="dname"/>
+       </association>
+   </resultMap>
+
+   <select id="findAll2" resultMap="emp1">
+       SELECT empno,ename,sal,hiredate,job,e.deptno,dname
+          FROM emp e LEFT JOIN dept d ON e.deptno=d.deptno
+   </select>
+
+</mapper>  
