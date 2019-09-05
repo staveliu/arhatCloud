@@ -10,30 +10,25 @@
 <!--图标库-->
 <script src="https://unpkg.com/ionicons@4.2.2/dist/ionicons.js"></script>
 
+
 </head>
 
 <body>
 
 <div class="container" id="container">
   <div class="form-container sign-up-container">
-    <form action="#">
+    <form action="user?action=register" method="post">
       <h1>注册罗汉云</h1>
-      <div class="social-container"> <a href="#" class="social">
-        <ion-icon name="logo-facebook"></ion-icon>
-        </a> <a href="#" class="social"> 
-        <ion-icon name="logo-googleplus"></ion-icon>
-        </a> <a href="#" class="social">
-        <ion-icon name="logo-linkedin"></ion-icon>
-        </a> </div>
-      <span>或使用用户名注册</span>
-      <input type="text" placeholder="姓名">
-      <input type="username" placeholder="用户名">
-      <input type="password" placeholder="密码">
-      <button>注册</button>
+      <input type="text" id="email" name="email" placeholder="邮箱">
+      <input type="username" id="usernameReg" name="usernameReg" placeholder="用户名">
+      <input type="password" id="passwordReg" name="passwordReg" placeholder="密码">
+      <input type="text" id="mobile" name="mobile" placeholder="手机号"><a id="get_mobile" href="javascript:verifyCode();">获取验证码</a>
+      <input type="text" id="verify" name="verify" placeholder="验证码">
+      <input type="button" id="btnRegister" value="注册">
     </form>
   </div>
   <div class="form-container sign-in-container">
-    <form action="#">
+    <form>
       <h1>罗汉云统一认证</h1>
       <div class="social-container"> <a href="#" class="social">
         <ion-icon name="logo-facebook"></ion-icon>
@@ -43,9 +38,9 @@
         <ion-icon name="logo-linkedin"></ion-icon>
         </a> </div>
       <span>或使用账号登录</span>
-      <input type="username" placeholder="用户名">
-      <input type="password" placeholder="密码">
-      <button>登录</button>
+      <input type="username" id="username" name="username" placeholder="用户名">
+      <input type="password" id="password" name="password" placeholder="密码">
+      <input type="button" id="btnLogin" value="登录">
     </form>
   </div>
   <div class="overlay-container">
@@ -64,7 +59,124 @@
   </div>
 </div>
 
-<script  src="js/script.js"></script> 
-	
+<script  src="js/script.js"></script>
+<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+
+
+    $(function(){
+        $.ajax({
+            url:"user",
+            data:{'action':"user"},
+            dataType:"json",
+            success:function(data){
+                if(data.status===200){
+                    location.href="page.html"
+                }else{
+
+                }
+            }
+        })
+    })
+    $(function(){
+        $("#btnLogin").click(()=>{
+            let username=$.trim($("#username").val())
+            let password=$.trim($("#password").val())
+            //发登录ajax请求.log("12")
+            $.ajax({
+                url:"user",
+                data:{'action':"login",'username':username,'password':password},
+                dataType:"json",
+                success:function(data){
+                    if(data.status===200){
+                        location.href="page.html"
+                    }else{
+                        alert("用户名密码错误")
+                    }
+                }
+            })
+        })
+    })
+
+    $(function(){
+        $("#btnRegister").click(()=>{
+            let email=$.trim($("#email"))
+            let username=$.trim($("#usernameReg").val())
+            let password=$.trim($("#passwordReg").val())
+            let mobile=$.trim($("#mobile").val())
+            let verify=$.trim($("#verify").val())
+            if(!username){
+                alert("用户名不能为空")
+                return
+            }
+            if(!password){
+                alert("密码不能为空")
+                return
+            }
+            if(!email){
+                alert("邮箱不能为空")
+                return
+            }
+            if(!verify){
+                alert("验证码不能为空")
+                return
+            }
+            if(!(/^1[3|4|5|7|8][0-9]\d{8,11}$/.test(mobile))){
+                alert("手机号格式错误", {
+                    icon: 2,
+                    title: '失败',
+                    closeBtn: 0,
+                    btnAlign: 'c'
+                });
+                return ;
+            }
+            $.ajax({
+                url:"user",
+                data:{'action':"register",'username':username,'password':password,'email':email,'mobile':mobile,'verify':verify},
+                dataType:"json",
+                success:function(data){
+                    if(data.status===200){
+                        alert("注册成功，准备登录吧！")
+                        location.href="login.html"
+                    }else if (data.status===402){
+                        alert("手机验证码错误")
+                    }else if (data.status===401){
+                        alert("注册失败，请重试")
+                        location.href="login.html"
+                    }else{
+                        alert("注册失败，未知原因")
+                        location.href="login.html"
+                    }
+                }
+            })
+        })
+    })
+
+    function verifyCode(){
+        let mobile=$.trim($("#mobile").val())
+        if(!(/^1[3|4|5|7|8][0-9]\d{8,11}$/.test(mobile))){
+            alert("手机号格式错误", {
+                icon: 2,
+                title: '失败',
+                closeBtn: 0,
+                btnAlign: 'c'
+            });
+            return ;
+        }
+        $.ajax({
+            url:"mobileCode",
+            data:{'mobile':mobile},
+            dataType:"json",
+            success:function(data){
+                if(data.status){
+                    document.getElementById("get_mobile").innerText="验证码获取成功"
+                    document.getElementById("get_mobile").href = "javascript:alert('请不要重复获取')"
+                }else{
+                    alert("请60秒后再获取")
+                }
+            }
+        })
+    }
+</script>
 </body>
 </html>

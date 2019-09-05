@@ -17,6 +17,7 @@ public class Usertest {
         User user = new User();
         user.setUsername("jack");
         user.setPassword(MD5Utils.MD5Encode("111111","utf8"));
+        System.out.println(MD5Utils.MD5Encode("111111","utf8"));
         User usertest = userMapper.selectByUserPass(user);
         System.out.println(usertest.getEmail());
         SqlSessionUtil.close(sqlSession);
