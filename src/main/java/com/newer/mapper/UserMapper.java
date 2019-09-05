@@ -11,7 +11,7 @@ public interface UserMapper {
 
     User selectByPrimaryKey(Integer uid);
 
-    User selectByUserPass(String username,String password);
+    User selectByUserPass(User user);
 
     int updateByPrimaryKeySelective(User record);
 
