@@ -27,7 +27,8 @@ public class UserServlet extends HttpServlet {
         response.setCharacterEncoding("utf-8");
         response.setContentType("application/json;charset=utf-8");
         PrintWriter out=response.getWriter();
-        String action = request.getParameter("action");
+        String action = "";
+        action = request.getParameter("action");
         JsonObject json = new JsonObject();
         if (action.equals("login")){
             String username = request.getParameter("username");
@@ -36,10 +37,10 @@ public class UserServlet extends HttpServlet {
             if (user != null){
                 HttpSession session = request.getSession();
                 session.setAttribute("user",user);
-                json.addProperty("status",true);
+                json.addProperty("status",200);
                 json.addProperty("message","登陆成功");
             }else{
-                json.addProperty("status",false);
+                json.addProperty("status",401);
                 json.addProperty("message","登陆失败");
             }
         }else if (action.equals("register")){
@@ -53,14 +54,25 @@ public class UserServlet extends HttpServlet {
             user.setStatus(1);
             int row = userService.addUser(user);
             if (row>0){
-                json.addProperty("status",true);
+                json.addProperty("status",200);
                 json.addProperty("message","注册成功");
             }else{
-                json.addProperty("status",false);
+                json.addProperty("status",401);
                 json.addProperty("message","注册失败");
             }
-        }else{
-            json.addProperty("message","未知指令");
+        }else if (action.equals("user")){
+            HttpSession session = request.getSession();
+            User user = (User) session.getAttribute("user");
+            if (user==null){
+                json.addProperty("status",401);
+                json.addProperty("message","未登录");
+            }else{
+                json.addProperty("status",200);
+                json.addProperty("username",user.getUsername());
+                json.addProperty("email",user.getEmail());
+                json.addProperty("mobile",user.getMobile());
+                json.addProperty("iconurl",user.getIconurl());
+            }
         }
         out.write(json.toString());
         out.close();

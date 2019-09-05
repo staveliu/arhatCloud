@@ -1,4 +1,4 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -61,8 +61,8 @@
                     <img src="img/timg1.jpg" height="100" width="100" title="点击更换头像" />
                 </div>
                 <div class="cusName">
-                    <p title="用户名称">用户名称</p>
-                    <span class="bdTell">账号绑定<i></i><em>187****3765</em></span>
+                    <p id="username"></p>
+                    <span class="bdTell">账号绑定<i></i><p id="mobile"></p></span>
                 </div>
             </div>
             <ul class="cus02">
@@ -87,6 +87,22 @@
     </div>
 </div>
 <!-- 内容  结束-->
+<script>
+    $(function () {
+        //加载所有部门信息
+        $.ajax({
+            url:"user?action=user",
+            dataType:"json",
+            async:false,//发送同步请求
+            success:function (data) {
+                if (data.status!==200){
+                    window.location.href = "login.html"
+                }
+                $("#username").innerText = data.username
+                $("#mobile").innerText = data.mobile
+            }
+        })
+</script>
 </body>
 
 </html>
