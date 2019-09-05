@@ -7,13 +7,14 @@
     <link rel="shortcut icon" href="http://www.yingmoo.com/img/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="css/common.css" />
     <link rel="stylesheet" href="css/shopsManager.css" />
-    <script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>
+
     <script type="text/javascript" src="js/common.js" ></script>
     <script type="text/javascript" src="js/navTop.js"></script>
     <script type="text/javascript" src="js/jquery.circliful.min.js"></script>
     <title>主页</title>
 </head>
 <body>
+<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
 <!-- 会员公共头部  开始-->
 <div class="shop_wrap">
     <div class="c100 nav_wrap">
@@ -91,17 +92,20 @@
     $(function () {
         //加载所有部门信息
         $.ajax({
-            url:"user?action=user",
-            dataType:"json",
-            async:false,//发送同步请求
-            success:function (data) {
-                if (data.status!==200){
-                    window.location.href = "login.html"
+            url: "user?action=user",
+            dataType: "json",
+            async: false,//发送同步请求
+            success: function (data) {
+
+                if (data.status !== 200) {
+                    location.href = "login.html"
+                    console.log("wewewe")
                 }
                 $("#username").innerText = data.username
                 $("#mobile").innerText = data.mobile
             }
         })
+    })
 </script>
 </body>
 
