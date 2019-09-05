@@ -96,7 +96,7 @@
             async:false,//发送同步请求
             success:function (data) {
                 if (data.status!==200){
-                    window.location.href = "login.html"
+                    location.href = "login.html"
                 }
                 $("#username").innerText = data.username
                 $("#mobile").innerText = data.mobile

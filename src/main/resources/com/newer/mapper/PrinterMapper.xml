@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.newer.mapper.PrinterMapper" >
+  <resultMap id="BaseResultMap" type="com.newer.domain.Printer" >
+    <id column="printId" property="printid" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="addrId" property="addrid" jdbcType="INTEGER" />
+    <result column="access_token" property="accessToken" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="add_time" property="addTime" jdbcType="TIMESTAMP" />
+    <result column="lastchange_time" property="lastchangeTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.newer.domain.Printer" extends="BaseResultMap" >
+    <result column="printer_info" property="printerInfo" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    printId, name, addrId, access_token, status, add_time, lastchange_time
+  </sql>
+  <sql id="Blob_Column_List" >
+    printer_info
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from yin_printer
+    where printId = #{printid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from yin_printer
+    where printId = #{printid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.newer.domain.Printer" >
+    insert into yin_printer (printId, name, addrId, 
+      access_token, status, add_time, 
+      lastchange_time, printer_info)
+    values (#{printid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{addrid,jdbcType=INTEGER}, 
+      #{accessToken,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{addTime,jdbcType=TIMESTAMP}, 
+      #{lastchangeTime,jdbcType=TIMESTAMP}, #{printerInfo,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.newer.domain.Printer" >
+    insert into yin_printer
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="printid != null" >
+        printId,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="addrid != null" >
+        addrId,
+      </if>
+      <if test="accessToken != null" >
+        access_token,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="addTime != null" >
+        add_time,
+      </if>
+      <if test="lastchangeTime != null" >
+        lastchange_time,
+      </if>
+      <if test="printerInfo != null" >
+        printer_info,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="printid != null" >
+        #{printid,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="addrid != null" >
+        #{addrid,jdbcType=INTEGER},
+      </if>
+      <if test="accessToken != null" >
+        #{accessToken,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="addTime != null" >
+        #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastchangeTime != null" >
+        #{lastchangeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="printerInfo != null" >
+        #{printerInfo,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.newer.domain.Printer" >
+    update yin_printer
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="addrid != null" >
+        addrId = #{addrid,jdbcType=INTEGER},
+      </if>
+      <if test="accessToken != null" >
+        access_token = #{accessToken,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="addTime != null" >
+        add_time = #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastchangeTime != null" >
+        lastchange_time = #{lastchangeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="printerInfo != null" >
+        printer_info = #{printerInfo,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where printId = #{printid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.newer.domain.Printer" >
+    update yin_printer
+    set name = #{name,jdbcType=VARCHAR},
+      addrId = #{addrid,jdbcType=INTEGER},
+      access_token = #{accessToken,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      add_time = #{addTime,jdbcType=TIMESTAMP},
+      lastchange_time = #{lastchangeTime,jdbcType=TIMESTAMP},
+      printer_info = #{printerInfo,jdbcType=LONGVARCHAR}
+    where printId = #{printid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.newer.domain.Printer" >
+    update yin_printer
+    set name = #{name,jdbcType=VARCHAR},
+      addrId = #{addrid,jdbcType=INTEGER},
+      access_token = #{accessToken,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      add_time = #{addTime,jdbcType=TIMESTAMP},
+      lastchange_time = #{lastchangeTime,jdbcType=TIMESTAMP}
+    where printId = #{printid,jdbcType=INTEGER}
+  </update>
+</mapper>

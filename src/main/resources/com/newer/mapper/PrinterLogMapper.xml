@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.newer.mapper.PrinterLogMapper" >
+  <resultMap id="BaseResultMap" type="com.newer.domain.PrinterLog" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="printId" property="printid" jdbcType="INTEGER" />
+    <result column="taskId" property="taskid" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="print_time" property="printTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, printId, taskId, status, print_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from yin_printer_log
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from yin_printer_log
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.newer.domain.PrinterLog" >
+    insert into yin_printer_log (id, printId, taskId, 
+      status, print_time)
+    values (#{id,jdbcType=INTEGER}, #{printid,jdbcType=INTEGER}, #{taskid,jdbcType=INTEGER}, 
+      #{status,jdbcType=VARCHAR}, #{printTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.newer.domain.PrinterLog" >
+    insert into yin_printer_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="printid != null" >
+        printId,
+      </if>
+      <if test="taskid != null" >
+        taskId,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="printTime != null" >
+        print_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="printid != null" >
+        #{printid,jdbcType=INTEGER},
+      </if>
+      <if test="taskid != null" >
+        #{taskid,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="printTime != null" >
+        #{printTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.newer.domain.PrinterLog" >
+    update yin_printer_log
+    <set >
+      <if test="printid != null" >
+        printId = #{printid,jdbcType=INTEGER},
+      </if>
+      <if test="taskid != null" >
+        taskId = #{taskid,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="printTime != null" >
+        print_time = #{printTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.newer.domain.PrinterLog" >
+    update yin_printer_log
+    set printId = #{printid,jdbcType=INTEGER},
+      taskId = #{taskid,jdbcType=INTEGER},
+      status = #{status,jdbcType=VARCHAR},
+      print_time = #{printTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

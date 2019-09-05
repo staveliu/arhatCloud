@@ -9,7 +9,10 @@
 
 <!--图标库-->
 <script src="https://unpkg.com/ionicons@4.2.2/dist/ionicons.js"></script>
-
+  <script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>
+  <script type="text/javascript" src="js/common.js" ></script>
+  <script type="text/javascript" src="js/navTop.js"></script>
+  <script type="text/javascript" src="js/jquery.circliful.min.js"></script>
 </head>
 
 <body>
@@ -64,7 +67,50 @@
   </div>
 </div>
 
-<script  src="js/script.js"></script> 
-	
+<script  src="js/script.js"></script>
+
+<script type="text/javascript">
+  $(function(){
+    $("#btnLogin").click(()=>{
+      let username=$.trim($("#username").val())
+      if(!username){
+        layer.alert("用户名不能为空")
+        return
+      }
+
+      let pwd=$.trim($("#pwd").val())
+      if(!pwd){
+        layer.alert("密码不能为空")
+        return
+      }
+
+      let code=$.trim($("#code").val())
+      if(!code){
+        layer.alert("验证码不能为空")
+        return
+      }
+
+      //发登录ajax请求
+      $.ajax({
+        url:"users",
+        data:{'action':"login",'username':username,'password':pwd,'code':code},
+        dataType:"json",
+        success:function(data){
+          if(data.suc){
+            location.href="index.html"
+          }else{
+            layer.msg(data.msg,{icon: 5,time:2000});
+          }
+        }
+      })
+
+    })
+  })
+
+
+  function change(){
+    $("#imagecode").attr("src","imageCode?"+Math.random())
+  }
+</script>
 </body>
 </html>
