@@ -13,11 +13,10 @@
 </head>
 
 <body>
-<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
 
 <div class="container" id="container">
   <div class="form-container sign-up-container">
-    <form>
+    <form action="#">
       <h1>注册罗汉云</h1>
       <div class="social-container"> <a href="#" class="social">
         <ion-icon name="logo-facebook"></ion-icon>
@@ -34,7 +33,7 @@
     </form>
   </div>
   <div class="form-container sign-in-container">
-    <form>
+    <form action="#">
       <h1>罗汉云统一认证</h1>
       <div class="social-container"> <a href="#" class="social">
         <ion-icon name="logo-facebook"></ion-icon>
@@ -44,9 +43,9 @@
         <ion-icon name="logo-linkedin"></ion-icon>
         </a> </div>
       <span>或使用账号登录</span>
-      <input type="username" id="username" name="username" placeholder="用户名">
-      <input type="password" id="password" name="password"placeholder="密码">
-      <button id="btnLogin">登录</button>
+      <input type="username" placeholder="用户名">
+      <input type="password" placeholder="密码">
+      <button>登录</button>
     </form>
   </div>
   <div class="overlay-container">
@@ -65,32 +64,7 @@
   </div>
 </div>
 
-<script  src="js/script.js"></script>
-<script type="text/javascript">
-    // $(function(){
-    //     $("#btnLogin").click(()=>{
-    //         //发登录ajax请求
-    //         $.ajax({
-    //             url:"user",
-    //             data:{'action':"login",'username':username,'password':password},
-    //             dataType:"json",
-    //             success:function(data){
-    //                 if(data.status === 200){
-    //                     location.href="page.html"
-    //                 }else{
-    //                     layer.msg(data.msg,{icon: 5,time:2000});
-    //                 }
-    //             }
-    //         })
-    //
-    //     })
-    // })
-
-
-    function change(){
-        $("#imagecode").attr("src","imageCode?"+Math.random())
-    }
-</script>
-
+<script  src="js/script.js"></script> 
+	
 </body>
 </html>

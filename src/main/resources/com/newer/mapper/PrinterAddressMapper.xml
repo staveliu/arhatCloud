@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.newer.mapper.PrinterAddressMapper" >
+  <resultMap id="BaseResultMap" type="com.newer.domain.PrinterAddress" >
+    <id column="addrId" property="addrid" jdbcType="INTEGER" />
+    <result column="orgname" property="orgname" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    addrId, orgname, address
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from yin_address
+    where addrId = #{addrid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from yin_address
+    where addrId = #{addrid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.newer.domain.PrinterAddress" >
+    insert into yin_address (addrId, orgname, address
+      )
+    values (#{addrid,jdbcType=INTEGER}, #{orgname,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.newer.domain.PrinterAddress" >
+    insert into yin_address
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="addrid != null" >
+        addrId,
+      </if>
+      <if test="orgname != null" >
+        orgname,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="addrid != null" >
+        #{addrid,jdbcType=INTEGER},
+      </if>
+      <if test="orgname != null" >
+        #{orgname,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.newer.domain.PrinterAddress" >
+    update yin_address
+    <set >
+      <if test="orgname != null" >
+        orgname = #{orgname,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where addrId = #{addrid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.newer.domain.PrinterAddress" >
+    update yin_address
+    set orgname = #{orgname,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR}
+    where addrId = #{addrid,jdbcType=INTEGER}
+  </update>
+</mapper>
