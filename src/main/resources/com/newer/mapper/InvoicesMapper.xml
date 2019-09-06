@@ -1,21 +1,21 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.newer.mapper.InvoicesMapper">
-  <resultMap id="BaseResultMap" type="com.newer.domain.Invoices">
-    <id column="invoiceId" jdbcType="INTEGER" property="invoiceid" />
-    <result column="value" jdbcType="DOUBLE" property="value" />
-    <result column="payed" jdbcType="INTEGER" property="payed" />
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.newer.mapper.InvoicesMapper" >
+  <resultMap id="BaseResultMap" type="com.newer.domain.Invoices" >
+    <id column="invoiceId" property="invoiceid" jdbcType="INTEGER" />
+    <result column="value" property="value" jdbcType="DOUBLE" />
+    <result column="payed" property="payed" jdbcType="INTEGER" />
   </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.newer.domain.Invoices">
-    <result column="fid" jdbcType="LONGVARCHAR" property="fid" />
+  <resultMap id="ResultMapWithBLOBs" type="com.newer.domain.Invoices" extends="BaseResultMap" >
+    <result column="fid" property="fid" jdbcType="LONGVARCHAR" />
   </resultMap>
-  <sql id="Base_Column_List">
+  <sql id="Base_Column_List" >
     invoiceId, value, payed
   </sql>
-  <sql id="Blob_Column_List">
+  <sql id="Blob_Column_List" >
     fid
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     ,
@@ -23,161 +23,70 @@
     from yin_invoices
     where invoiceId = #{invoiceid,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from yin_invoices
     where invoiceId = #{invoiceid,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.newer.domain.Invoices">
+  <insert id="insert" parameterType="com.newer.domain.Invoices" >
     insert into yin_invoices (invoiceId, value, payed, 
       fid)
     values (#{invoiceid,jdbcType=INTEGER}, #{value,jdbcType=DOUBLE}, #{payed,jdbcType=INTEGER}, 
       #{fid,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.newer.domain.Invoices">
+  <insert id="insertSelective" parameterType="com.newer.domain.Invoices" >
     insert into yin_invoices
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="invoiceid != null">
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="invoiceid != null" >
         invoiceId,
       </if>
-      <if test="value != null">
+      <if test="value != null" >
         value,
       </if>
-      <if test="payed != null">
+      <if test="payed != null" >
         payed,
       </if>
-      <if test="fid != null">
+      <if test="fid != null" >
         fid,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="invoiceid != null">
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="invoiceid != null" >
         #{invoiceid,jdbcType=INTEGER},
       </if>
-      <if test="value != null">
+      <if test="value != null" >
         #{value,jdbcType=DOUBLE},
       </if>
-      <if test="payed != null">
+      <if test="payed != null" >
         #{payed,jdbcType=INTEGER},
       </if>
-      <if test="fid != null">
+      <if test="fid != null" >
         #{fid,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.newer.domain.Invoices">
+  <update id="updateByPrimaryKeySelective" parameterType="com.newer.domain.Invoices" >
     update yin_invoices
-    <set>
-      <if test="value != null">
+    <set >
+      <if test="value != null" >
         value = #{value,jdbcType=DOUBLE},
       </if>
-      <if test="payed != null">
+      <if test="payed != null" >
         payed = #{payed,jdbcType=INTEGER},
       </if>
-      <if test="fid != null">
+      <if test="fid != null" >
         fid = #{fid,jdbcType=LONGVARCHAR},
       </if>
     </set>
     where invoiceId = #{invoiceid,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.newer.domain.Invoices">
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.newer.domain.Invoices" >
     update yin_invoices
     set value = #{value,jdbcType=DOUBLE},
       payed = #{payed,jdbcType=INTEGER},
       fid = #{fid,jdbcType=LONGVARCHAR}
     where invoiceId = #{invoiceid,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.newer.domain.Invoices">
-    update yin_invoices
-    set value = #{value,jdbcType=DOUBLE},
-      payed = #{payed,jdbcType=INTEGER}
-    where invoiceId = #{invoiceid,jdbcType=INTEGER}
-  </update>
-  <resultMap id="BaseResultMap" type="1com.newer.domain.Invoices">
-    <id column="invoiceId" jdbcType="INTEGER" property="invoiceid" />
-    <result column="value" jdbcType="DOUBLE" property="value" />
-    <result column="payed" jdbcType="INTEGER" property="payed" />
-  </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="1com.newer.domain.Invoices">
-    <result column="fid" jdbcType="LONGVARCHAR" property="fid" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    invoiceId, value, payed
-  </sql>
-  <sql id="Blob_Column_List">
-    fid
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
-    select 
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from yin_invoices
-    where invoiceId = #{invoiceid,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from yin_invoices
-    where invoiceId = #{invoiceid,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="1com.newer.domain.Invoices">
-    insert into yin_invoices (invoiceId, value, payed, 
-      fid)
-    values (#{invoiceid,jdbcType=INTEGER}, #{value,jdbcType=DOUBLE}, #{payed,jdbcType=INTEGER}, 
-      #{fid,jdbcType=LONGVARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="1com.newer.domain.Invoices">
-    insert into yin_invoices
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="invoiceid != null">
-        invoiceId,
-      </if>
-      <if test="value != null">
-        value,
-      </if>
-      <if test="payed != null">
-        payed,
-      </if>
-      <if test="fid != null">
-        fid,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="invoiceid != null">
-        #{invoiceid,jdbcType=INTEGER},
-      </if>
-      <if test="value != null">
-        #{value,jdbcType=DOUBLE},
-      </if>
-      <if test="payed != null">
-        #{payed,jdbcType=INTEGER},
-      </if>
-      <if test="fid != null">
-        #{fid,jdbcType=LONGVARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="1com.newer.domain.Invoices">
-    update yin_invoices
-    <set>
-      <if test="value != null">
-        value = #{value,jdbcType=DOUBLE},
-      </if>
-      <if test="payed != null">
-        payed = #{payed,jdbcType=INTEGER},
-      </if>
-      <if test="fid != null">
-        fid = #{fid,jdbcType=LONGVARCHAR},
-      </if>
-    </set>
-    where invoiceId = #{invoiceid,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="1com.newer.domain.Invoices">
-    update yin_invoices
-    set value = #{value,jdbcType=DOUBLE},
-      payed = #{payed,jdbcType=INTEGER},
-      fid = #{fid,jdbcType=LONGVARCHAR}
-    where invoiceId = #{invoiceid,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="1com.newer.domain.Invoices">
+  <update id="updateByPrimaryKey" parameterType="com.newer.domain.Invoices" >
     update yin_invoices
     set value = #{value,jdbcType=DOUBLE},
       payed = #{payed,jdbcType=INTEGER}

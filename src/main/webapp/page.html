@@ -7,13 +7,13 @@
     <link rel="shortcut icon" href="http://www.yingmoo.com/img/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="css/common.css" />
     <link rel="stylesheet" href="css/shopsManager.css" />
-    <script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>
     <script type="text/javascript" src="js/common.js" ></script>
     <script type="text/javascript" src="js/navTop.js"></script>
     <script type="text/javascript" src="js/jquery.circliful.min.js"></script>
     <title>主页</title>
 </head>
 <body>
+<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
 <!-- 会员公共头部  开始-->
 <div class="shop_wrap">
     <div class="c100 nav_wrap">
@@ -58,11 +58,12 @@
             <!--用户信息  开始 -->
             <div class="cus01">
                 <div class="cusImg">
-                    <img src="img/timg1.jpg" height="100" width="100" title="点击更换头像" />
+                    <img id="icon" src="" height="100" width="100" title="点击更换头像" />
                 </div>
                 <div class="cusName">
-                    <p title="用户名称">用户名称</p>
-                    <span class="bdTell">账号绑定<i></i><em>187****3765</em></span>
+                    <p id="username"></p>
+                    <span id="mobile"></span>
+                    <span><a href="javascript:loginout();">退出登录</a></span>
                 </div>
             </div>
             <ul class="cus02">
@@ -87,6 +88,34 @@
     </div>
 </div>
 <!-- 内容  结束-->
+<script>
+    $(function () {
+        //加载所有部门信息
+        $.ajax({
+            url: "user?action=user",
+            dataType: "json",
+            async: false,//发送同步请求
+            success: function (data) {
+                if (data.status !== 200) {
+                    location.href = "login.html"
+                }
+                document.getElementById("username").innerText = data.username
+                document.getElementById("mobile").innerText = data.mobile
+                document.getElementById("icon").src = data.iconurl
+            }
+        })
+    })
+    function loginout() {
+        $.ajax({
+            url: "user?action=logout",
+            dataType: "json",
+            async: false,//发送同步请求
+            success: function (data) {
+                location.href = "login.html"
+            }
+        })
+    }
+</script>
 </body>
 
 </html>
