@@ -2,30 +2,179 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <link rel="shortcut icon" href="http://www.yingmoo.com/img/favicon.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="css/common.css" />
-    <link rel="stylesheet" href="css/shopsManager.css" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="shortcut icon" href="http://www.yingmoo.com/img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/shopsManager.css">
     <script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>
-    <script type="text/javascript" src="js/common.js" ></script>
+    <script type="text/javascript" src="js/common.js"></script>
     <script type="text/javascript" src="js/navTop.js"></script>
+
     <script type="text/javascript" src="js/jquery.circliful.min.js"></script>
+    <link href="css/style1.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="js/jquery-1.8.3.js"></script>
+    <script type="text/javascript" src="js/jquery-ui-1.9.2.custom.js"></script>
+    <script type="text/javascript" src="js/share.js"></script>
+    <script src="js/jquery.1.7.2.min.js"></script>
+    <script src="js/modernizr.custom.71147.js"></script>
+    <script src="js/jquery.paperfold.js"></script>
     <title>订单管理</title>
 </head>
 <body>
 <div class="shop_wrap">
     <div class="c100 nav_wrap">
         <div class="fl shop_logo">
-            <a href="http://www.yingmoo.com" title="罗汉云印"><img src="img/timg1.jpg" width="90" height="55" /></a>
+            <a href="http://www.yingmoo.com" title="罗汉云印"><img src="img/timg1.jpg" width="90" height="55"></a>
         </div>
         <div class="fl nav act_nav">
             <ul>
                 <li><a href="page.html" class="">个人中心</a></li>
-                <li class="index-page-link hide"><a href="#" class="on">订单处理</a></li>
+                <li class="index-page-link hide"><a class="on" href="indent.html">订单处理</a></li>
                 <li><a class="" href="keeper.html">仓库管理</a></li>
             </ul>
         </div>
     </div>
 </div>
+
+<div class="wrap overflow clearfix mt30 pb50">
+    <!--店铺信息and nav-->
+    <div class="w238 fl overflow">
+        <!--企业标志和name-->
+        <div class="name overflow w100">
+            <dl class="pt30 overflow">
+                <dt class="boder-b ">
+                    <img src="img/timg1.jpg" width="200" height="100">
+                </dt>
+                <dd class="pt20 tl  f20">
+                    罗汉云印乔碧达核心认证
+                </dd>
+            </dl>
+        </div>
+        <div class="w100 overflow clearfix name_bg">
+            <p></p>
+            <p></p>
+        </div>
+        <div class="liat_nav overflow clearfix pt5">
+            <dl>
+                <dt>
+                    <a href="#" id="nav_r2">订单管理</a>
+                </dt>
+            </dl>
+            <dl>
+                <dt>
+                    <a href="#">结算管理</a>
+                </dt>
+            </dl>
+            <dl>
+                <dt>
+                    <a href="#">取件预约</a>
+                </dt>
+            </dl>
+        </div>
+    </div>
+    <!--信息展示-->
+    <div class="w826 fr overflow">
+        <!--订单管理-->
+        <div class="w100 overflow pt20 pb20 boder-b">
+            <p class="f24 tl l-35 blue fl"><img src="img/sz_r2_c2.jpg" class="pr15 fl pt5"> 订单管理</p>
+        </div>
+        <!--订单栏目-->
+        <div class="dd_main overflow pt25  w100">
+            <div class="lad_bg overflow">
+                <ul>
+                    <li>
+                        <a href="#">文档上传</a>
+                    </li>
+                    <li>
+                        <a href="#" class="dd_bg">我的订单</a>
+                    </li>
+                    <li>
+                        <a href="#">待付款</a>
+                    </li>
+                    <li>
+                        <a href="#">已完成</a>
+                    </li>
+                    <li>
+                        <a href="#">已关闭</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!--订单数-->
+        <div class="wrap overflow clearfix pt15 pb15 boder-b tl l-30 f18">
+            订单数:<em class="blue"> 2 </em>订单金额: <em class="orang">￥1563.00</em>
+        </div>
+        <!--搜索-->
+        <div class="wrap  clearfix pt25">
+            <div class=" ss_if">
+                <script type="text/javascript" src="js/jquery-ui-1.9.2.custom.js"></script>
+                <script type="text/javascript" src="js/share.js"></script>
+                <dl class="fr">
+                    <dt class="fl">  <input type="text" class="ss2_in" value="请输入商品名称或者单号搜索" onfocus="if(this.value=='请输入商品名称或者单号搜索'){this.value='';this.style.color='#515050'}" onblur="if(this.value==''){this.value='请输入商品名称或者单号搜索';this.style.color='#515050'}" x-webkit-grammar="bUIltin:search" x-webkit-speech="" maxlength="30" name="keyword">
+                    </dt>
+                    <dd class="fr"> <input type="submit" value="搜索" class="submit2 fr ">
+                    </dd>
+                </dl>
+            </div>
+        </div>
+        <!--表单-->
+        <div class="shop_nav overflow clearfix mt20">
+            <ul>
+                <li>打印文档</li>
+                <li>单价</li>
+                <li>数量</li>
+                <li>买家</li>
+                <li>价格</li>
+                <li>预约取件时间</li>
+                <li>状态</li>
+            </ul>
+        </div>
+
+        <div class="dd_list overflow clearfix">
+            <div class="div_r1"><b class="f16">2018-03-01</b>  订单号: 12961385944331528
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;您的每一份订单我们都会捐出0.1作为公益!
+            </div>
+            <div class="table_show overflow w100 clearfix">
+                <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                    <tbody><tr>
+                        <td valign="middle" align="center">
+                            <ul>
+                                <li>
+                                    <img src="img/timg1.jpg" width="70px" height="70px">
+                                </li>
+                                <div>
+                                    <h4>备注</h4>
+                                    <p>非卖品</p>
+                                </div>
+                            </ul>
+
+                        </td>
+                        <td style="text-align:center;vertical-align:middle;">
+                            ￥200.00
+                        </td>
+                        <td>
+                            1
+                        </td>
+                        <td style="text-align:center;vertical-align:middle;">
+                            我太难了
+                        </td>
+                        <td>￥123.00</td>
+                        <td>
+                            2019-02-22
+                        </td>
+                        <td>
+                            <em class="blue">
+                                已完成
+                            </em>
+                        </td>
+                    </tr>
+                    </tbody></table>
+
+            </div>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>
