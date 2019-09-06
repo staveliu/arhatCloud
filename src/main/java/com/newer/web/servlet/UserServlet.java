@@ -54,23 +54,35 @@ public class UserServlet extends HttpServlet {
             }
 
         }else if (action.equals("register")){
-            User user = new User();
-            user.setUsername(request.getParameter("username"));
-            user.setPassword(MD5Utils.MD5Encode(request.getParameter("password"),"utf8"));
-            user.setRid(0);
-            user.setEmail(request.getParameter("email"));
-            user.setMobile(request.getParameter("mobile"));
-            user.setIconurl("/default.jpg");
-            user.setStatus(1);
-            int row = userService.addUser(user);
-            if (row>0){
-                json.addProperty("status",200);
-                json.addProperty("message","注册成功");
-            }else{
-                json.addProperty("status",401);
-                json.addProperty("message","注册失败");
+            HttpSession session = request.getSession();
+            Integer verifyCode = Integer.valueOf(request.getParameter("verify"));
+            Integer sessionCode = (Integer)session.getAttribute("mobileCode");
+            if (!verifyCode.equals(sessionCode)){
+                json.addProperty("status",402);
+                json.addProperty("message","手机验证码错误");
+                json.addProperty("verify", sessionCode);
+                json.addProperty("test",verifyCode);
+                out.write(json.toString());
+            }else {
+                session.setAttribute("mobileCode",0);
+                User user = new User();
+                user.setUsername(request.getParameter("username"));
+                user.setPassword(MD5Utils.MD5Encode(request.getParameter("password"), "utf8"));
+                user.setRid(0);
+                user.setEmail(request.getParameter("email"));
+                user.setMobile(request.getParameter("mobile"));
+                user.setIconurl("img/timg1.jpg");
+                user.setStatus(1);
+                int row = userService.addUser(user);
+                if (row > 0) {
+                    json.addProperty("status", 200);
+                    json.addProperty("message", "注册成功");
+                } else {
+                    json.addProperty("status", 401);
+                    json.addProperty("message", "注册失败");
+                }
+                out.write(json.toString());
             }
-            out.write(json.toString());
         }else if (action.equals("user")){
             HttpSession session = request.getSession();
             User user = (User) session.getAttribute("user");
@@ -84,6 +96,11 @@ public class UserServlet extends HttpServlet {
                 json.addProperty("mobile",user.getMobile());
                 json.addProperty("iconurl",user.getIconurl());
             }
+            out.write(json.toString());
+        }else if (action.equals("logout")){
+            HttpSession session = request.getSession();
+            session.invalidate();
+            json.addProperty("status",true);
             out.write(json.toString());
         }
         out.close();
