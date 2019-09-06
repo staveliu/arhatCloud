@@ -60,8 +60,6 @@ public class UserServlet extends HttpServlet {
             if (!verifyCode.equals(sessionCode)){
                 json.addProperty("status",402);
                 json.addProperty("message","手机验证码错误");
-                json.addProperty("verify", sessionCode);
-                json.addProperty("test",verifyCode);
                 out.write(json.toString());
             }else {
                 session.setAttribute("mobileCode",0);
@@ -102,6 +100,35 @@ public class UserServlet extends HttpServlet {
             session.invalidate();
             json.addProperty("status",true);
             out.write(json.toString());
+        }else if (action.equals("changepwd")){
+
+            HttpSession session = request.getSession();
+
+            Integer verifyCode = Integer.valueOf(request.getParameter("verify"));
+            Integer sessionCode = (Integer)session.getAttribute("mobileCode");
+            if (!verifyCode.equals(sessionCode)){
+                json.addProperty("status",402);
+                json.addProperty("message","手机验证码错误");
+                out.write(json.toString());
+            }else {
+                User user = (User) session.getAttribute("user");
+                if (user == null) {
+                    json.addProperty("status", 401);
+                    json.addProperty("message", "未登录");
+                } else {
+                    String newpwd = request.getParameter("newpwd");
+                    int row = userService.changePwd(user,newpwd);
+                    if (row>0){
+                        json.addProperty("status",200);
+                        json.addProperty("message","修改成功");
+                        session.invalidate();
+                    }else{
+                        json.addProperty("status",500);
+                        json.addProperty("message","修改失败，未知错误");
+                    }
+                }
+                out.write(json.toString());
+            }
         }
         out.close();
     }

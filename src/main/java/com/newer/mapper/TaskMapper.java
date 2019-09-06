@@ -2,6 +2,8 @@ package com.newer.mapper;
 
 import com.newer.domain.Task;
 
+import java.util.List;
+
 public interface TaskMapper {
     int deleteByPrimaryKey(Integer taskid);
 
@@ -10,6 +12,8 @@ public interface TaskMapper {
     int insertSelective(Task record);
 
     Task selectByPrimaryKey(Integer taskid);
+
+    List<Task> selectByUid(Integer uid);
 
     int updateByPrimaryKeySelective(Task record);
 

@@ -24,7 +24,6 @@ public class UserService {
         input.setUsername(username);
         input.setPassword(password);
         User userReturn = userMapper.selectByUserPass(input);
-        System.out.println(userReturn.getEmail());
         SqlSessionUtil.close(sqlSession);
         return userReturn;
     }
@@ -32,6 +31,15 @@ public class UserService {
     public int addUser(User user){
         init();
         int row = userMapper.insert(user);
+        sqlSession.commit();
+        SqlSessionUtil.close(sqlSession);
+        return row;
+    }
+
+    public int changePwd(User sessionUser,String newPwd){
+        init();
+        sessionUser.setPassword(MD5Utils.MD5Encode(newPwd,"utf8"));
+        int row = userMapper.updateByPrimaryKey(sessionUser);
         sqlSession.commit();
         SqlSessionUtil.close(sqlSession);
         return row;

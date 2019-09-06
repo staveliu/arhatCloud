@@ -89,7 +89,7 @@ a {
     width: 100%;
 }
 
-button {
+#btnLogin {
     border-radius: 20px;
     border: 1px solid #ff4b2b;
     background: #ff4b2b;
