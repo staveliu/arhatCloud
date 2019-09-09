@@ -7,7 +7,7 @@ import com.newer.domain.OrderInfo;
 import com.newer.domain.Task;
 import com.newer.mapper.InvoicesMapper;
 import com.newer.mapper.TaskMapper;
-import com.newer.mapper.UserMapper;
+import java.util.List;
 import com.newer.util.SqlSessionUtil;
 
 import java.util.LinkedList;
@@ -31,9 +31,17 @@ public class OrderService {
         List<OrderInfo> order = new LinkedList<>();
         List<Task> task = taskMapper.selectByUid(uid);
         for(Task tsk:task){
-            Invoices invoices = invoicesMapper.selectByPrimaryKey(tsk.getInvoiceid());
-            JsonArray file = new Gson().fromJson(invoices.getFid(),JsonArray.class);
+            JsonArray file = new Gson().fromJson(tsk.getFiles(),JsonArray.class);
+            System.out.println(file.toString());
             OrderInfo orderInfo = new OrderInfo();
+            orderInfo.setFiles(file);
+            orderInfo.setCreateTime(tsk.getCreateTime());
+            orderInfo.setPrintCode(tsk.getPrintcode());
+            orderInfo.setPrintTime(tsk.getPrintTime());
+            orderInfo.setStatus(tsk.getStatus());
+            Invoices invoices = invoicesMapper.selectByPrimaryKey(tsk.getInvoiceid());
+            orderInfo.setTotalPrice(invoices.getPrice());
+            order.add(orderInfo);
         }
         SqlSessionUtil.close(sqlSession);
         return order;

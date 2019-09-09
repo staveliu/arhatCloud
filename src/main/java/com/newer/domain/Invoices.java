@@ -3,11 +3,11 @@ package com.newer.domain;
 public class Invoices {
     private Integer invoiceid;
 
-    private Double value;
+    private Double price;
+
+    private String transId;
 
     private Integer payed;
-
-    private String fid;
 
     public Integer getInvoiceid() {
         return invoiceid;
@@ -17,12 +17,20 @@ public class Invoices {
         this.invoiceid = invoiceid;
     }
 
-    public Double getValue() {
-        return value;
+    public Double getPrice() {
+        return price;
     }
 
-    public void setValue(Double value) {
-        this.value = value;
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public String getTransId() {
+        return transId;
+    }
+
+    public void setTransId(String transId) {
+        this.transId = transId;
     }
 
     public Integer getPayed() {
@@ -33,11 +41,13 @@ public class Invoices {
         this.payed = payed;
     }
 
-    public String getFid() {
-        return fid;
-    }
-
-    public void setFid(String fid) {
-        this.fid = fid == null ? null : fid.trim();
+    @Override
+    public String toString() {
+        return "Invoices{" +
+                "invoiceid=" + invoiceid +
+                ", price=" + price +
+                ", transId='" + transId + '\'' +
+                ", payed=" + payed +
+                '}';
     }
 }

@@ -24,6 +24,8 @@
     <!--定义映射器-->
     <mappers>
         <mapper class = "com.newer.mapper.UserMapper" />
+        <mapper class = "com.newer.mapper.TaskMapper" />
+        <mapper class = "com.newer.mapper.InvoicesMapper" />
     </mappers>
 	
 </configuration>

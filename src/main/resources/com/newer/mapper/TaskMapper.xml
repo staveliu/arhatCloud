@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.newer.mapper.TaskMapper" >
-  <resultMap id="BaseResultMap" type="com.newer.domain.Task" >
+  <resultMap id="BaseResultMap" type="com.newer.domain.Task" autoMapping="true">
     <id column="taskId" property="taskid" jdbcType="INTEGER" />
     <result column="uid" property="uid" jdbcType="INTEGER" />
+    <result column="files" property="files" jdbcType="VARCHAR" />
     <result column="invoiceId" property="invoiceid" jdbcType="INTEGER" />
     <result column="printcode" property="printcode" jdbcType="VARCHAR" />
     <result column="color" property="color" jdbcType="INTEGER" />
     <result column="status" property="status" jdbcType="VARCHAR" />
     <result column="printId" property="printid" jdbcType="INTEGER" />
-    <result column="transId" property="transid" jdbcType="INTEGER" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="print_time" property="printTime" jdbcType="TIMESTAMP" />
-    <result column="price" property="price" jdbcType="DOUBLE" />
+
   </resultMap>
   <sql id="Base_Column_List" >
-    taskId, uid, invoiceId, printcode, color, status, printId, transId, create_time, 
-    print_time, price
+    taskId, uid,files, invoiceId, printcode, color, status, printId, create_time,
+    print_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -24,25 +24,19 @@
     from yin_task
     where taskId = #{taskid,jdbcType=INTEGER}
   </select>
-  <select id="selectByUid" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select
-    <include refid="Base_Column_List" />
-    from yin_task
-    where taskId = #{uid,jdbcType=INTEGER}
-  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from yin_task
     where taskId = #{taskid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.newer.domain.Task" >
-    insert into yin_task (taskId, uid, invoiceId, 
+    insert into yin_task (taskId, uid,files, invoiceId,
       printcode, color, status, 
-      printId, transId, create_time, 
-      print_time, price)
-    values (#{taskid,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, #{invoiceid,jdbcType=INTEGER}, 
+      printId, create_time,
+      print_time)
+    values (#{taskid,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER},#{files,jdbcType=VARCHAR}, #{invoiceid,jdbcType=INTEGER},
       #{printcode,jdbcType=VARCHAR}, #{color,jdbcType=INTEGER}, #{status,jdbcType=VARCHAR}, 
-      #{printid,jdbcType=INTEGER}, #{transid,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{printTime,jdbcType=TIMESTAMP}, #{price,jdbcType=DOUBLE})
+      #{printid,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP},
+      #{printTime,jdbcType=TIMESTAMP}
   </insert>
   <insert id="insertSelective" parameterType="com.newer.domain.Task" >
     insert into yin_task

@@ -1,47 +1,48 @@
 package com.newer.domain;
 
-import java.util.Date;
+import com.google.gson.JsonArray;
 
+import java.util.Date;
 public class OrderInfo {
-    private String fileName;
-    private Integer totalPrice;
-    private Date createTime;
-    private Date printTime;
+    private JsonArray files;
+    private Double totalPrice;
+    private String createTime;
+    private String printTime;
     private Integer status;
     private String printCode;
 
     public OrderInfo() {
     }
 
-    public String getFileName() {
-        return fileName;
+    public JsonArray getFiles() {
+        return files;
     }
 
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
+    public void setFiles(JsonArray files) {
+        this.files = files;
     }
 
-    public Integer getTotalPrice() {
+    public Double getTotalPrice() {
         return totalPrice;
     }
 
-    public void setTotalPrice(Integer totalPrice) {
+    public void setTotalPrice(Double totalPrice) {
         this.totalPrice = totalPrice;
     }
 
-    public Date getCreateTime() {
+    public String getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(String createTime) {
         this.createTime = createTime;
     }
 
-    public Date getPrintTime() {
+    public String getPrintTime() {
         return printTime;
     }
 
-    public void setPrintTime(Date printTime) {
+    public void setPrintTime(String printTime) {
         this.printTime = printTime;
     }
 
@@ -59,5 +60,17 @@ public class OrderInfo {
 
     public void setPrintCode(String printCode) {
         this.printCode = printCode;
+    }
+
+    @Override
+    public String toString() {
+        return "OrderInfo{" +
+                "files=" + files +
+                ", totalPrice=" + totalPrice +
+                ", createTime=" + createTime +
+                ", printTime=" + printTime +
+                ", status=" + status +
+                ", printCode='" + printCode + '\'' +
+                '}';
     }
 }

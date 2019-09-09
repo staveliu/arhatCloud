@@ -3,23 +3,16 @@
 <mapper namespace="com.newer.mapper.InvoicesMapper" >
   <resultMap id="BaseResultMap" type="com.newer.domain.Invoices" >
     <id column="invoiceId" property="invoiceid" jdbcType="INTEGER" />
-    <result column="value" property="value" jdbcType="DOUBLE" />
+    <result column="price" property="price" jdbcType="DOUBLE" />
+    <result column="transId" property="transid" jdbcType="VARCHAR" />
     <result column="payed" property="payed" jdbcType="INTEGER" />
   </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="com.newer.domain.Invoices" extends="BaseResultMap" >
-    <result column="fid" property="fid" jdbcType="LONGVARCHAR" />
-  </resultMap>
   <sql id="Base_Column_List" >
-    invoiceId, value, payed
+    invoiceId, price, transId, payed
   </sql>
-  <sql id="Blob_Column_List" >
-    fid
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
     from yin_invoices
     where invoiceId = #{invoiceid,jdbcType=INTEGER}
   </select>
@@ -28,10 +21,10 @@
     where invoiceId = #{invoiceid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.newer.domain.Invoices" >
-    insert into yin_invoices (invoiceId, value, payed, 
-      fid)
-    values (#{invoiceid,jdbcType=INTEGER}, #{value,jdbcType=DOUBLE}, #{payed,jdbcType=INTEGER}, 
-      #{fid,jdbcType=LONGVARCHAR})
+    insert into yin_invoices (invoiceId, price, transId, 
+      payed)
+    values (#{invoiceid,jdbcType=INTEGER}, #{price,jdbcType=DOUBLE}, #{transid,jdbcType=VARCHAR}, 
+      #{payed,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.newer.domain.Invoices" >
     insert into yin_invoices
@@ -39,56 +32,50 @@
       <if test="invoiceid != null" >
         invoiceId,
       </if>
-      <if test="value != null" >
-        value,
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="transid != null" >
+        transId,
       </if>
       <if test="payed != null" >
         payed,
-      </if>
-      <if test="fid != null" >
-        fid,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="invoiceid != null" >
         #{invoiceid,jdbcType=INTEGER},
       </if>
-      <if test="value != null" >
-        #{value,jdbcType=DOUBLE},
+      <if test="price != null" >
+        #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="transid != null" >
+        #{transid,jdbcType=VARCHAR},
       </if>
       <if test="payed != null" >
         #{payed,jdbcType=INTEGER},
-      </if>
-      <if test="fid != null" >
-        #{fid,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.newer.domain.Invoices" >
     update yin_invoices
     <set >
-      <if test="value != null" >
-        value = #{value,jdbcType=DOUBLE},
+      <if test="price != null" >
+        price = #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="transid != null" >
+        transId = #{transid,jdbcType=VARCHAR},
       </if>
       <if test="payed != null" >
         payed = #{payed,jdbcType=INTEGER},
       </if>
-      <if test="fid != null" >
-        fid = #{fid,jdbcType=LONGVARCHAR},
-      </if>
     </set>
-    where invoiceId = #{invoiceid,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.newer.domain.Invoices" >
-    update yin_invoices
-    set value = #{value,jdbcType=DOUBLE},
-      payed = #{payed,jdbcType=INTEGER},
-      fid = #{fid,jdbcType=LONGVARCHAR}
     where invoiceId = #{invoiceid,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.newer.domain.Invoices" >
     update yin_invoices
-    set value = #{value,jdbcType=DOUBLE},
+    set price = #{price,jdbcType=DOUBLE},
+      transId = #{transid,jdbcType=VARCHAR},
       payed = #{payed,jdbcType=INTEGER}
     where invoiceId = #{invoiceid,jdbcType=INTEGER}
   </update>

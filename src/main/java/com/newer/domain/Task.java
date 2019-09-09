@@ -1,11 +1,11 @@
 package com.newer.domain;
 
 import java.util.Date;
-
 public class Task {
     private Integer taskid;
 
     private Integer uid;
+    private String files;
 
     private Integer invoiceid;
 
@@ -13,17 +13,14 @@ public class Task {
 
     private Integer color;
 
-    private String status;
+    private Integer status;
 
     private Integer printid;
 
-    private Integer transid;
 
-    private Date createTime;
+    private String createTime;
 
-    private Date printTime;
-
-    private Double price;
+    private String printTime;
 
     public Integer getTaskid() {
         return taskid;
@@ -41,6 +38,14 @@ public class Task {
         this.uid = uid;
     }
 
+    public String getFiles() {
+        return files;
+    }
+
+    public void setFiles(String files) {
+        this.files = files;
+    }
+
     public Integer getInvoiceid() {
         return invoiceid;
     }
@@ -54,7 +59,7 @@ public class Task {
     }
 
     public void setPrintcode(String printcode) {
-        this.printcode = printcode == null ? null : printcode.trim();
+        this.printcode = printcode;
     }
 
     public Integer getColor() {
@@ -65,12 +70,12 @@ public class Task {
         this.color = color;
     }
 
-    public String getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
-        this.status = status == null ? null : status.trim();
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     public Integer getPrintid() {
@@ -81,35 +86,20 @@ public class Task {
         this.printid = printid;
     }
 
-    public Integer getTransid() {
-        return transid;
-    }
 
-    public void setTransid(Integer transid) {
-        this.transid = transid;
-    }
-
-    public Date getCreateTime() {
+    public String getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(String createTime) {
         this.createTime = createTime;
     }
 
-    public Date getPrintTime() {
+    public String getPrintTime() {
         return printTime;
     }
 
-    public void setPrintTime(Date printTime) {
+    public void setPrintTime(String printTime) {
         this.printTime = printTime;
-    }
-
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
     }
 }
